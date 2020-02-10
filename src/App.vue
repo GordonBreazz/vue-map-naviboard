@@ -3,20 +3,24 @@
     <v-app-bar
       app
       clipped-left
-      color="orange"
+      color="blue-grey"
+       class="white--text"
     >
+
       <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-img class="mx-2" src="http://cbs-uu.ru/images/logo_white.png" max-height="60" max-width="60" contain></v-img>
       <span class="title ml-3 mr-5">Библиогород&nbsp;<span class="font-weight-light">Улан-Удэ</span></span>
       <v-text-field
         solo-inverted
         flat
         hide-details
-        label="Библиотека, остановка общественного транспорта, район"
+        label="Найди свою библиотеку"
         prepend-inner-icon="search"
         color="white"
       />
 
       <v-spacer />
+
     </v-app-bar>
 
     <v-navigation-drawer
@@ -75,6 +79,14 @@
     </v-navigation-drawer>
 
     <v-content>
+      ok
+    <yandex-map :coords="coords" @click="onClick">
+      <ymap-marker
+        marker-id="123"
+        :coords="coords"
+        :balloon-template="balloonTemplate"
+      ></ymap-marker>
+    </yandex-map>
       <v-container
         fluid
         class="grey lighten-4 fill-height"
@@ -116,6 +128,15 @@
         </v-row>
       </v-container>
     </v-content>
+    <v-footer
+      app
+      color="blue-grey"
+      class="white--text"
+    >
+      <span>МАУ ЦБС г. Улан-Удэ</span>
+      <v-spacer />
+      <span>&copy; 2020</span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -140,8 +161,23 @@ export default {
       { icon: 'chat_bubble', text: 'Trash' },
       { icon: 'help', text: 'Help' },
       { icon: 'phonelink', text: 'App downloads' },
-      { icon: 'keyboard', text: 'Keyboard shortcuts' }
-    ]
+      { icon: 'keyboard', text: 'Keyboard shortcuts' },
+      { coords: [54, 39] }
+    ],
+    computed: {
+      balloonTemplate () {
+        return `
+        <h1 class="red">Hi, everyone!</h1>
+        <p>I am here: ${this.coords}</p>
+        <img src="http://via.placeholder.com/350x150">
+      `
+      }
+    },
+    methods: {
+      onClick (e) {
+        this.coords = e.get('coords')
+      }
+    }
   })
 }
 </script>
@@ -150,4 +186,12 @@ export default {
 #keep .v-navigation-drawer__border {
   display: none
 }
+
+.ymap-container {
+  height: 600px;
+}
+.red {
+  color: red;
+}
+
 </style>
