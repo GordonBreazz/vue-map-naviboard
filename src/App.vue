@@ -3,16 +3,17 @@
     <v-app-bar
       app
       clipped-left
-      color="amber"
+      color="orange"
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
+      <span class="title ml-3 mr-5">Библиогород&nbsp;<span class="font-weight-light">Улан-Удэ</span></span>
       <v-text-field
         solo-inverted
         flat
         hide-details
-        label="Search"
+        label="Библиотека, остановка общественного транспорта, район"
         prepend-inner-icon="search"
+        color="white"
       />
 
       <v-spacer />
